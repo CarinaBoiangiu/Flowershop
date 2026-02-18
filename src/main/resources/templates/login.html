@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autentificare - Flower</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/loginStyle.css}">
+
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<div class="content">
+    <div class="login-section">
+        <div class="login-box">
+            <h2>Bine ai venit!</h2>
+
+            <div th:if="${param.error}" class="error-message">
+                Nume de utilizator sau parolă incorectă!
+            </div>
+
+            <div th:if="${param.logout}" class="logout-message">
+                Te-ai deconectat cu succes.
+            </div>
+
+            <form th:action="@{/login}" method="POST">
+
+                <div class="form-group">
+                    <label for="username">Utilizator</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Parolă</label>
+                    <input type="password" id="password" name="password" placeholder="Parola ta" required>
+                </div>
+
+                <button type="submit" class="login-btn">Autentificare</button>
+            </form>
+
+            <div class="register-link">
+                <p>Nu ai cont? <a th:href="@{/register}">Înregistrează-te aici</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h1>Contactează-ne</h1>
+        <p>Adresa: Str. Tineretului 10, Chișinău, Moldova</p>
+        <p>Telefon: +373 22 123 456</p>
+        <p>Email: GrowFlowers@gmail.com</p>
+        <div class="social-icons">
+            <a href="#"><img th:src="@{/icons/facebook.png}" alt="Facebook"></a>
+            <a href="#"><img th:src="@{/icons/twiter.png}" alt="Twitter"></a>
+            <a href="#"><img th:src="@{/icons/insta.png}" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

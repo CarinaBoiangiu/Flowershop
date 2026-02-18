@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
+    @Autowired private UserService userService;
 
-    @Autowired
-    private UserService userService;
-
-    // Critic: Fără această metodă, Spring Security intră în buclă infinită de redirecționare
     @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }
+    public String showLoginForm() { return "login"; }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // Trebuie să coincidă cu numele register.html din templates
+        return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
-        userService.registerUser(user);
-        return "redirect:/login";
+    public String registerUser(@ModelAttribute User user, Model model) {
+        try {
+            userService.registerUser(user);
+            return "redirect:/login?success";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "register";
+        }
     }
 }

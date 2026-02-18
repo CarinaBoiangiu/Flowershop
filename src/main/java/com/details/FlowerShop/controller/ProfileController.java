@@ -18,6 +18,9 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String showProfile(Principal principal, Model model) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
         // Folosim Principal pentru a lua username-ul celui logat
         String username = principal.getName();
         User user = userService.findByUserName(username)
@@ -25,6 +28,6 @@ public class ProfileController {
 
         model.addAttribute("user", user);
 
-        return "profile";
+        return "profil"; // se potrivește cu templates/profil.html
     }
 }

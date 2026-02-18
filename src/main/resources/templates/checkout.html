@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizare Comandă</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .checkout-form { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .place-order-btn { width: 100%; background: var(--color-secondary, #800020); color: white; padding: 15px; border: none; font-size: 18px; cursor: pointer; margin-top: 10px;}
+    </style>
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<div class="content">
+    <div class="checkout-form">
+        <h2>Detalii Livrare</h2>
+        <form th:action="@{/cart/checkout/process}" method="post">
+
+            <div class="form-group">
+                <label>Nume Complet</label>
+                <input type="text" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Adresa de Livrare</label>
+                <textarea name="address" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Metoda de Plată</label>
+                <select name="paymentMethod" style="width: 100%; padding: 10px;">
+                    <option value="CARD">Card Online</option>
+                    <option value="CASH">Ramburs la livrare</option>
+                </select>
+            </div>
+
+            <h3>Total de plată: <span th:text="${totalPrice}">0</span> lei</h3>
+
+            <button type="submit" class="place-order-btn">Plasează Comanda</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h1>Contactează-ne</h1>
+        <p>Adresa: Str. Tineretului 10, Chișinău, Moldova</p>
+        <p>Telefon: +373 22 123 456</p>
+        <p>Email: GrowFlowers@gmail.com</p>
+        <div class="social-icons">
+            <a href="#"><img th:src="@{/icons/facebook.png}" alt="Facebook"></a>
+            <a href="#"><img th:src="@{/icons/twiter.png}" alt="Twitter"></a>
+            <a href="#"><img th:src="@{/icons/insta.png}" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

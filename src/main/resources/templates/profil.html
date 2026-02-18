@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profilul Meu</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .profile-header { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .order-history { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .badge { padding: 5px 10px; border-radius: 15px; background: #28a745; color: white; font-size: 0.8em; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f9f9f9; color: #800020; }
+    </style>
+</head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<div class="content container">
+    <div class="profile-header">
+        <h1 th:text="'Salut, ' + ${user.username} + '!'">Salut, User!</h1>
+        <p>Email: <span th:text="${user.email}">user@example.com</span></p>
+
+        <div style="margin-top: 15px;">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn-logout" style="background:none; border:none; color:red; cursor:pointer; font-size:16px; text-decoration:underline;">
+                    Deconectare
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="order-history">
+        <h2>Istoric Comenzi</h2>
+
+        <div th:if="${#lists.isEmpty(user.comenzi)}">
+            <p style="color: #666;">Nu ai plasat încă nicio comandă.</p>
+        </div>
+
+        <table th:if="${!#lists.isEmpty(user.comenzi)}">
+            <thead>
+            <tr>
+                <th>ID Comandă</th>
+                <th>Buchete Comandate</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="comanda : ${user.comenzi}">
+                <td th:text="'#' + ${comanda.id}" style="font-weight:bold;">#1</td>
+                <td>
+                    <span th:each="buchet, iterStat : ${comanda.buchete}">
+                        <span th:text="${buchet.denumireBuchet}">Trandafiri</span>
+                        <span th:text="'(' + ${buchet.pret} + ' lei)'"></span>
+                        <span th:if="${!iterStat.last}">, </span>
+                    </span>
+                </td>
+                <td><span class="badge">Plasată</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h1>Contactează-ne</h1>
+        <p>Adresa: Str. Tineretului 10, Chișinău, Moldova</p>
+        <p>Telefon: +373 22 123 456</p>
+        <p>Email: GrowFlowers@gmail.com</p>
+        <div class="social-icons">
+            <a href="#"><img th:src="@{/icons/facebook.png}" alt="Facebook"></a>
+            <a href="#"><img th:src="@{/icons/twiter.png}" alt="Twitter"></a>
+            <a href="#"><img th:src="@{/icons/insta.png}" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
