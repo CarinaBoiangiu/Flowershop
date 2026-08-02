@@ -20,9 +20,9 @@ The **Flowershop** project is designed to simplify daily operations for a flower
 ---
 
 ## 🛠️ Tech Stack
-*   **Languages:** [e.g., Java, C#, Python, etc.]
-*   **Backend / Framework:** [e.g., Spring Boot, .NET, Node.js, or core language]
-*   **Database:** [e.g., MySQL, PostgreSQL, SQL Server]
+*   **Languages:** [ Java]
+*   **Backend / Framework:** [ Spring Boot]
+*   **Database:** [MySQL, SQL Server]
 *   **Tools:** Git, Docker, [any other tools used]
 
 ---
@@ -33,8 +33,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Prerequisites
 Make sure you have the following installed:
-*   [e.g., Java JDK 17+ / Python 3.x / .NET SDK]
-*   [e.g., MySQL / PostgreSQL]
+*   [e.g., Java JDK 17]
+*   [e.g., MySQL]
 
 ### Installation
 1. Clone the repository:
